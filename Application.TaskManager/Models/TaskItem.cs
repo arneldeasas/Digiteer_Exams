@@ -10,6 +10,7 @@ public class TaskItem
 	public DateTime? FinishedDate { get; set; }
 	public DateTime CreatedDate { get; set; }
 	public DateTime UpdatedDate { get; set; }
+	public bool Archived { get; set; } = false;
 	public int UserId { get; set; }
 	public User User { get; set; } = null!;
 }
