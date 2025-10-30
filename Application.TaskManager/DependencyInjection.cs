@@ -1,7 +1,6 @@
-﻿namespace Application.TaskManager
-{
-	public class DependencyInjection
-	{
+﻿namespace Application.TaskManager;
 
-	}
+public class DependencyInjection
+{
+
 }
