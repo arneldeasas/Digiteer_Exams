@@ -1,17 +1,56 @@
+using Application.TaskManager.DataTransferObjects.Task;
+using Application.TaskManager.DataTransferObjects.User;
+using Application.TaskManager.UseCases.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 namespace TaskManager.API
 {
 	[Route("tasks")]
 	[ApiController]
-	public class TasksController : ControllerBase
+	public class TasksController(ITaskUc Uc) : ControllerBase
 	{
-		//private readonly ApplicationDbContext _context;
+		[HttpPost("create-task")]
+		public async Task<IActionResult> CreateTask([FromBody]TaskCreateFormDTO dto)
+		{
+			await Uc.CreateTask(dto);
 
-		//public TasksController(ApplicationDbContext context)
-		//{
-		//    _context = context;
-		//}
+			return Ok();
+		}
+		[HttpPost("start-task/{id}")]
+		public async Task<IActionResult> StartTask(int id)
+		{
+			await Uc.StartTask(id);
 
+			return Ok();
+		}
+		[HttpPost("complete-task/{id}")]
+		public async Task<IActionResult> CompleteTask(int id)
+		{
+			await Uc.CompleteTask(id);
+
+			return Ok();
+		}
+		[HttpPost("delete-task/{id}")]
+		public async Task<IActionResult> DeleteTask(int id)
+		{
+			await Uc.DeleteTask(id);
+
+			return Ok();
+		}
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetTask(int id)
+		{
+			var dto = await Uc.GetTask(id);
+			if(dto == null) return NotFound();
+
+			return Ok(dto);
+		}
+		[HttpGet("all/{userId}")]
+		public async Task<IActionResult> GetUserTasks(int userId)
+		{
+			var dto = await Uc.GetAllUserTasks(userId);
+
+			return Ok(dto);
+		}
 		//[HttpGet]
 		//public async Task<IActionResult> Get()
 		//{
