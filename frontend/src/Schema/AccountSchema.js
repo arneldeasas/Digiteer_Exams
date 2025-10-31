@@ -9,10 +9,10 @@ export const SignInSchema = yup
 export const SignUpSchema = yup
   .object({
     username: yup.string().required("Username is required :P"),
-    name: yup.string().required("Password is required :P").min(3),
+    name: yup.string().required("Name is required :P").min(3),
     email: yup
       .string()
-      .required("Password is required :P")
+      .required("Email is required :P")
       .email("Invalid email format"),
     password: yup
       .string()
