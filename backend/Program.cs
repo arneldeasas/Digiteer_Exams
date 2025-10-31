@@ -1,4 +1,6 @@
 using Infra.Database.Data;
+using Infra.Database;
+using Application.TaskManager;
 using Microsoft.EntityFrameworkCore;
 
 DotNetEnv.Env.Load();
@@ -13,8 +15,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-var app = builder.Build();
+builder.Services.AddApplicationDependencies();
+builder.Services.AddDatabaseDependencies();
 
+var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {

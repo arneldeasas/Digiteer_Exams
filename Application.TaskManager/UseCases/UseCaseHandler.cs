@@ -2,7 +2,7 @@
 
 namespace Application.TaskManager.UseCases;
 
-internal class UseCaseHandler(ILogger Logger)
+internal class UseCaseHandler(ILogger<UseCaseHandler> Logger)
 {
 	public async Task<T> HandleUseCaseAsync<T>(Func<Task<T>> useCaseAction, string useCaseName, params object[] args )
 	{
