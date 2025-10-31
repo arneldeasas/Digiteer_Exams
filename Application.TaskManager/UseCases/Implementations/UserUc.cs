@@ -12,10 +12,10 @@ internal class UserUc(UseCaseHandler Handler, ICommandRepo Command, IReadRepo Re
 	public Task SignInUser(SignInFormDTO form) =>
 		Handler.HandleUseCaseAsync(async () =>
 		{
-			var user = await Read.FirstOrDefaultAsync<User>(x => x.UserName.Equals(form.UserName, StringComparison.CurrentCultureIgnoreCase));
+			var user = await Read.FirstOrDefaultAsync<User>(x => x.UserName.ToLower() == form.UserName.ToLower());
 			if (user is null) throw new ApplicationException("Invalid username or password");
 
-			var passwordValid = PasswordService.VerifyPassword(form.Password, user.PasswordHash);
+			var passwordValid = PasswordService.VerifyPassword(user.PasswordHash, form.Password);
 			if (!passwordValid) throw new ApplicationException("Invalid username or password");
 
 		}, nameof(SignInUser), form);
@@ -24,11 +24,13 @@ internal class UserUc(UseCaseHandler Handler, ICommandRepo Command, IReadRepo Re
 		Handler.HandleUseCaseAsync(async () =>
 		{
 			//Check for existing user
-			var userAlreadyExists= await Read.ExistsAsync<User>(x=>x.UserName.Equals(form.UserName, StringComparison.CurrentCultureIgnoreCase));
+			var userAlreadyExists= await Read.ExistsAsync<User>(x=> x.UserName.ToLower() == form.UserName.ToLower());
 			if(userAlreadyExists) throw new ApplicationException("User with the same username already exists");
 
 			User user = form.Adapt<User>();
+
 			user.PasswordHash = PasswordService.HashPassword(form.Password);
+			user.CreatedDate = DateTime.UtcNow;
 
 			await Command.AddAsync(user);
 
@@ -36,5 +38,5 @@ internal class UserUc(UseCaseHandler Handler, ICommandRepo Command, IReadRepo Re
 
 			Command.UntrackAll();
 
-		}, nameof(SignInUser), form);
+		}, nameof(SignUpUser), form);
 }
