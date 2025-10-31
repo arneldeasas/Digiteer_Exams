@@ -44,9 +44,9 @@ function SignInPage() {
   };
   return (
     <div className="w-screen h-screen bg-gray-100 flex flex-col items-center">
-      <Card className="max-w-[1440px] w-full m-5">
+      <Card className="max-w-[1440px] w-full m-10">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-between items-center p-4">
+          <div className="flex justify-between items-center p-8">
             <div className="flex flex-col items-start">
               <Typography variant="h6">Sign In Page</Typography>
               <Typography variant="subtitle1">
