@@ -1,12 +1,13 @@
+import { Route, Routes } from 'react-router-dom';
+import SignUpPage from './pages/account/SignUpPage';
 import './App.css'
-import Tasks from "./Tasks"
 
 function App() {
   return (
-    <div className="app">
-      <h1>📝 React Task Evaluator</h1>
-      <Tasks />
-    </div>
+<Routes>
+  <Route path="/" element={<SignInPage />} />
+  <Route path="/sign-up" element={<SignUpPage />} />
+</Routes>
   );
 }
 
