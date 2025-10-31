@@ -7,5 +7,5 @@ public interface ITaskUc
 	Task CreateTask(TaskFormDTO form);
 	Task StartTask(int taskId);
 	Task CompleteTask(int taskId);
-	Task DeleteTask(TaskFormDTO form);
+	Task DeleteTask(int taskId);
 }

@@ -23,4 +23,21 @@ internal class UseCaseHandler(ILogger Logger)
 			throw;
 		}
 	}
+	public async Task HandleUseCaseAsync(Func<Task> useCaseAction, string useCaseName, params object[] args)
+	{
+		try
+		{
+			Logger.LogInformation("Started handling: {UseCaseName}", useCaseName);
+			Logger.LogDebug("Started handling: {UseCaseName} @{Arguments}", useCaseName, args);
+
+			await useCaseAction();
+
+			Logger.LogInformation("Completed handling: {UseCaseName} ", useCaseName);
+		}
+		catch (Exception ex)
+		{
+			Logger.LogError(ex, "Error occurred in use case: {UseCaseName}", useCaseName);
+			throw;
+		}
+	}
 }
