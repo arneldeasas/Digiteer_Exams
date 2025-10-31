@@ -14,24 +14,12 @@ internal class TaskUc(UseCaseHandler Handler, ICommandRepo Command, IReadRepo Re
 	public Task CreateTask(TaskFormDTO form)=>
 		Handler.HandleUseCaseAsync(async () =>
 		{
-			try
-			{
-				await Command.BeginTransactionAsync();
+			TaskItem taskItem = form.Adapt<TaskItem>();
+			await Command.AddAsync(taskItem);
 
-				TaskItem taskItem = form.Adapt<TaskItem>();
-				await Command.AddAsync(taskItem);
+			await Command.SaveChangesAsync();
 
-				await Command.SaveChangesAsync();
-
-				Command.UntrackAll();
-				await Command.CommitAsync();
-			}
-			catch (Exception)
-			{
-				await Command.RollbackAsync();
-				throw;
-			}
-
+			Command.UntrackAll();
 		}, nameof(CompleteTask), form);
 
 	public Task CompleteTask(int taskId)=>
