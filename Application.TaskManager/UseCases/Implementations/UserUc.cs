@@ -9,7 +9,7 @@ namespace Application.TaskManager.UseCases.Implementations;
 
 internal class UserUc(UseCaseHandler Handler, ICommandRepo Command, IReadRepo Read,IPasswordService PasswordService) : IUserUc
 {
-	public Task SignInUser(SignInFormDTO form) =>
+	public Task<int> SignInUser(SignInFormDTO form) =>
 		Handler.HandleUseCaseAsync(async () =>
 		{
 			var user = await Read.FirstOrDefaultAsync<User>(x => x.UserName.ToLower() == form.UserName.ToLower());
@@ -17,7 +17,7 @@ internal class UserUc(UseCaseHandler Handler, ICommandRepo Command, IReadRepo Re
 
 			var passwordValid = PasswordService.VerifyPassword(user.PasswordHash, form.Password);
 			if (!passwordValid) throw new ApplicationException("Invalid username or password");
-
+			return user.Id;
 		}, nameof(SignInUser), form);
 
 	public Task SignUpUser(UserFormDTO form) =>
