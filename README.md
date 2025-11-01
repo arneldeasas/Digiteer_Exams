@@ -82,10 +82,10 @@ Organized frontend into:
 
 | Page | Screenshot |
 |------|-------------|
-| **Sign In** | ![Sign In](./images/signin.jpeg) |
-| **Sign Up** | ![Sign Up](./images/signup.jpeg) |
-| **Tasks** | ![Tasks](./images/tasks.jpeg) |
-| **Create Task Dialog** | ![Create Task](./images/createtask.jpeg) |
+| **Sign In** | ![Sign In](./images/signin.jpg) |
+| **Sign Up** | ![Sign Up](./images/signup.jpg) |
+| **Tasks** | ![Tasks](./images/tasks.jpg) |
+| **Create Task Dialog** | ![Create Task](./images/createtask.jpg) |
 
 ---
 
