@@ -1,51 +1,104 @@
-# 🧪 Full-Stack Evaluator – Technical Exam
+# 🧠 Task Manager — Technical Assessment
 
-Welcome to the technical evaluation!
+Hi **Digiteer Inc!** 👋  
+I’m **Arnel De Asas**, your Fullstack Developer 😄
 
-This monorepo contains both the **backend (.NET 9 Web API)** and **frontend (React)** projects. Your task is to build and/or fix key parts of this intentionally incomplete system. Expect quirks. Think like a dev in the wild.
-
----
-
-## ⏱️ Time Limit
-
-**4 to 5 hours**  
-Treat this like a timed test. Don’t overthink it. Show your best work in that window.
+This project showcases my implementation of a **Task Management System**, built with a strong focus on **Clean Architecture principles** and a modern React frontend.
 
 ---
 
-## 🎯 Objectives
+## 🧩 Overview
 
-- ✅ Connect frontend to the existing API
-- 🔧 Implement or complete missing backend logic
-- 🔄 Handle real-world scenarios (partial data, errors, state)
-- 💅 Code should be clean, structured, and readable
-- 📦 Commit regularly — **no one big fat commit**
+This project demonstrates my approach to building **structured, scalable, and maintainable** software — from backend architecture to a responsive frontend UI.
 
 ---
 
-## 📦 Stack Overview
+## ⚙️ Backend — ASP.NET Core Web API
 
-### Backend
+### 🏗 Architecture
+- Implemented using **Clean Architecture concepts**.  
+  Not a full-blown version, but focused on the **core principles that matter most**:
+  - **Dependency Inversion**
+  - **Dependency flow toward the Domain/Application layer**
+- Organized into multiple projects within the backend solution:
+  - **Application Layer**
+  - **Infrastructure-Database Layer**
+  - **API Layer**
 
-- .NET 9 Web API
-- Entity Framework Core
-- PostgreSQL
-- Swagger docs
+### 🧮 Data Management
+- Custom **Repository Pattern** inspired by **CQRS**, for clean data handling and separation of commands and queries.
+- Implemented **custom response models** to ensure consistent communication with the frontend.
 
-### Frontend
-
-- React + Axios
-- Redux Toolkit (if present)
-- Vite (dev server)
-- Styled however you like (no CSS wars)
+### 🚨 Error Handling & Logging
+- Added a **centralized middleware** for global error handling.
+- Exceptions are allowed to bubble up to this middleware for uniform handling.
+- Integrated **structured logging**, ready to connect with **Seq** for log aggregation.
 
 ---
 
-✅ Submission Guidelines
-- Push your code to a public GitHub repo
-- Include a short write-up in your commit messages or a NOTES.md file:
-- What you implemented
-- What’s missing (if any)
-- How to test your changes
+## 💻 Frontend — React + Vite
 
-Good luck. Build smart. Code loud. 💻🔥
+### 🧱 Tech Stack Enhancements
+Added several modern libraries to enhance development and user experience:
+- **Material UI (MUI)** — For rich UI components.
+- **Tailwind CSS** — For utility-first styling.
+- **Yup** — For schema validation.
+- **React Hook Form** — For flexible, declarative form handling.
+- **Notistack** — For intuitive toast notifications.
+- **TanStack Query** — For efficient API querying and state synchronization.
+
+### 📄 Implemented Pages & Features
+- **Sign In Page**
+- **Sign Up Page**
+- **Tasks Page** (enhanced UI)
+- **Create Task Dialog**
+
+Organized frontend into:
+- `Mutations/`  
+- `Queries/`  
+- `Helpers/`  
+- `Pages/`  
+- `Components/`
+
+---
+
+## ✨ Features Implemented
+✅ **End-to-End Working Features**
+- User **Sign Up**
+- User **Sign In**
+- **Create Task**
+- **Start Task**
+
+⚙️ **Available but not yet wired to frontend**
+- Update Task  
+- Finish Task  
+- Delete Task  
+
+(All are working and tested via **Postman/Swagger UI**.)
+
+---
+
+## 🖼️ Screenshots
+
+| Page | Screenshot |
+|------|-------------|
+| **Sign In** | ![Sign In](./signin.jpeg) |
+| **Sign Up** | ![Sign Up](./signup.jpeg) |
+| **Tasks** | ![Tasks](./tasks.jpeg) |
+| **Create Task Dialog** | ![Create Task](./createtask.jpeg) |
+
+---
+
+## 🧩 Summary
+
+This assessment demonstrates how I:
+- Transformed a simple starter codebase into a **layered, scalable application**
+- Applied **Clean Architecture principles**
+- Enhanced the **frontend experience** using modern React tools
+- Delivered a **cleaner, more maintainable project structure**
+
+---
+
+**🚀 Thank you, Digiteer Inc!**  
+This was an awesome challenge to work on — I hope it reflects how much I leveled up the given codebase 🙌  
+— *Arnel De Asas*
