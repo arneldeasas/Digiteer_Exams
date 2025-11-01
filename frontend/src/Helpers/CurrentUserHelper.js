@@ -9,6 +9,9 @@ const CurrentUserHelper = {
     const userId = user ? JSON.parse(user) : null;
     return userId;
   },
+  clearCurrentUser: () => {
+    localStorage.removeItem("currentUser");
+  },
 };
 
 export default CurrentUserHelper;
