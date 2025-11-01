@@ -4,10 +4,11 @@ using Application.TaskManager.Repositories;
 using Application.TaskManager.Services.Interfaces;
 using Application.TaskManager.UseCases.Interfaces;
 using Mapster;
+using ApplicationException = Application.TaskManager.Exceptions.ApplicationException;
 
 namespace Application.TaskManager.UseCases.Implementations;
 
-internal class UserUc(UseCaseHandler Handler, ICommandRepo Command, IReadRepo Read,IPasswordService PasswordService) : IUserUc
+internal class UserUc(UseCaseHandler Handler, ICommandRepo Command, IReadRepo Read, IPasswordService PasswordService) : IUserUc
 {
 	public Task<int> SignInUser(SignInFormDTO form) =>
 		Handler.HandleUseCaseAsync(async () =>
@@ -24,8 +25,8 @@ internal class UserUc(UseCaseHandler Handler, ICommandRepo Command, IReadRepo Re
 		Handler.HandleUseCaseAsync(async () =>
 		{
 			//Check for existing user
-			var userAlreadyExists= await Read.ExistsAsync<User>(x=> x.UserName.ToLower() == form.UserName.ToLower());
-			if(userAlreadyExists) throw new ApplicationException("User with the same username already exists");
+			var userAlreadyExists = await Read.ExistsAsync<User>(x => x.UserName.ToLower() == form.UserName.ToLower());
+			if (userAlreadyExists) throw new ApplicationException("User with the same username already exists");
 
 			User user = form.Adapt<User>();
 

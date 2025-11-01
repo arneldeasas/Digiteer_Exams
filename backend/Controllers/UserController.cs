@@ -17,8 +17,8 @@ namespace task_manager_api.Controllers
 		[HttpPost("sign-in")]
 		public async Task<IActionResult> SignIn([FromBody] SignInFormDTO dto)
 		{
-			await Uc.SignInUser(dto);
-			return Ok();
+			var data = await Uc.SignInUser(dto);
+			return Ok(new SuccessResponse<int> { Data = data });
 		}
 
 	}
