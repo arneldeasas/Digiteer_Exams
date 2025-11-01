@@ -32,12 +32,11 @@ function SignUpPage() {
   const mutation = useMutation({
     mutationFn: signUpUser,
     onSuccess: () => {
+      reset();
       enqueueSnackbar("Sign Up Successful!", { variant: "success" });
       navigate("/");
     },
     onError: (error) => {
-      console.log(error);
-
       enqueueSnackbar("Sign Up Failed! " + error.ErrorMessage, {
         variant: "error",
       });
@@ -47,6 +46,7 @@ function SignUpPage() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(SignUpSchema),

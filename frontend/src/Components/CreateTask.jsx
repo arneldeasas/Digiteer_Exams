@@ -37,6 +37,7 @@ function CreateTask() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(CreateTaskSchema),
@@ -51,6 +52,7 @@ function CreateTask() {
     mutationFn: createTask,
     onSuccess: () => {
       enqueueSnackbar("Task Created Successfully!", { variant: "success" });
+      reset();
       queryClient.invalidateQueries(["tasks", currentUser.id]);
       handleClose();
     },
