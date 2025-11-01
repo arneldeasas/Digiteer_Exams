@@ -1,4 +1,5 @@
 ﻿using Application.TaskManager.DataTransferObjects.Task;
+using Application.TaskManager.Exceptions;
 using Application.TaskManager.Models;
 using Application.TaskManager.Repositories;
 using Application.TaskManager.UseCases.Interfaces;

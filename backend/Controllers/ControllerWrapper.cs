@@ -5,7 +5,7 @@ namespace task_manager_api.Controllers;
 
 public class ControllerWrapper :ControllerBase
 {
-	async Task<IActionResult> ExecuteRequestAsync(Func<Task> action)
+	protected async Task<IActionResult> ExecuteRequestAsync(Func<Task> action)
 	{
 		try
 		{
@@ -14,14 +14,14 @@ public class ControllerWrapper :ControllerBase
 		}
 		catch (ApplicationException ex)
 		{
-			return BadRequest(ex);
+			return BadRequest(ex.Message);
 		}
 		catch (Exception ex)
 		{
 			return Problem(ex.InnerException?.Message ?? "Server error occured");
 		}
 	}
-	async Task<IActionResult> ExecuteRequestAsync<T>(Func<Task<T>> action)
+	protected async Task<IActionResult> ExecuteRequestAsync<T>(Func<Task<T>> action)
 	{
 		try
 		{

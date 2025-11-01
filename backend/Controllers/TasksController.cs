@@ -1,7 +1,8 @@
 using Application.TaskManager.DataTransferObjects.Task;
-using Application.TaskManager.DataTransferObjects.User;
+using Application.TaskManager.Exceptions;
 using Application.TaskManager.UseCases.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using task_manager_api.Controllers;
 namespace TaskManager.API
 {
 	[Route("tasks")]
@@ -9,7 +10,7 @@ namespace TaskManager.API
 	public class TasksController(ITaskUc Uc) : ControllerBase
 	{
 		[HttpPost("create-task")]
-		public async Task<IActionResult> CreateTask([FromBody]TaskCreateFormDTO dto)
+		public async Task<IActionResult> CreateTask([FromBody] TaskCreateFormDTO dto)
 		{
 			await Uc.CreateTask(dto);
 
@@ -40,7 +41,7 @@ namespace TaskManager.API
 		public async Task<IActionResult> GetTask(int id)
 		{
 			var dto = await Uc.GetTask(id);
-			if(dto == null) return NotFound();
+			if (dto == null) throw new ItemNotFoundException();
 
 			return Ok(dto);
 		}

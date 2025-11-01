@@ -6,7 +6,7 @@ namespace task_manager_api.Controllers
 {
 	[Route("user")]
 	[ApiController]
-	public class UserController(IUserUc Uc) : Controller
+	public class UserController(IUserUc Uc) : ControllerBase
 	{
 		[HttpPost("sign-up")]
 		public async Task<IActionResult> SignUp([FromBody] UserFormDTO dto)
@@ -14,7 +14,6 @@ namespace task_manager_api.Controllers
 			await Uc.SignUpUser(dto);
 			return Ok();
 		}
-
 		[HttpPost("sign-in")]
 		public async Task<IActionResult> SignIn([FromBody] SignInFormDTO dto)
 		{
