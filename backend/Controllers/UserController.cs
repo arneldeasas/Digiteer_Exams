@@ -12,7 +12,7 @@ namespace task_manager_api.Controllers
 		public async Task<IActionResult> SignUp([FromBody] UserFormDTO dto)
 		{
 			await Uc.SignUpUser(dto);
-			return Ok();
+			return Ok(new SuccessResponse());
 		}
 		[HttpPost("sign-in")]
 		public async Task<IActionResult> SignIn([FromBody] SignInFormDTO dto)

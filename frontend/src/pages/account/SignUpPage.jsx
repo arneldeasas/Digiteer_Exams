@@ -36,7 +36,11 @@ function SignUpPage() {
       navigate("/");
     },
     onError: (error) => {
-      enqueueSnackbar("Sign Up Failed!", { variant: "error" });
+      console.log(error);
+
+      enqueueSnackbar("Sign Up Failed! " + error.ErrorMessage, {
+        variant: "error",
+      });
     },
   });
 
