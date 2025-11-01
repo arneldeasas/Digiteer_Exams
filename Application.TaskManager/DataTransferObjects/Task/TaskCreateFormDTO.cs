@@ -15,10 +15,6 @@ public record TaskCreateFormDTO
 
 	[Required]
 	[DateNotInPast]
-	public DateTime StartDate { get; init; }
-
-	[Required]
-	[DateNotInPast]
 	public DateTime DueDate { get; init; }
 
 	public int UserId { get; init; }
