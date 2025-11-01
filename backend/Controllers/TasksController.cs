@@ -50,7 +50,7 @@ namespace TaskManager.API
 		{
 			var dto = await Uc.GetAllUserTasks(userId);
 
-			return Ok(dto);
+			return Ok(new SuccessResponse<IEnumerable<TaskListDTO>> { Data = dto });
 		}
 		//[HttpGet]
 		//public async Task<IActionResult> Get()

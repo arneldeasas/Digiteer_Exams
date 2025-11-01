@@ -100,6 +100,12 @@ internal class TaskUc(UseCaseHandler Handler, ICommandRepo Command, IReadRepo Re
 					FinishedDate = x.FinishedDate,
 					CreatedDate = x.CreatedDate
 				});
+			
+			foreach(var item in dto)
+			{
+				item.TaskStatus = item.FinishedDate.HasValue ? "Completed" :
+								  item.StartDate.HasValue ? "In Progress" : "Not Started";
+			}
 
 			return dto.AsEnumerable();
 		}, nameof(GetAllUserTasks), userId);
