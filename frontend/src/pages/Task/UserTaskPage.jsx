@@ -2,6 +2,7 @@ import { Add, Assignment } from "@mui/icons-material";
 import { Typography, Card, Chip, IconButton, Button } from "@mui/material";
 import TaskCardMenu from "../../Components/TaskCardMenu";
 import TaskCard from "../../Components/TaskCard";
+import CreateTask from "../../Components/CreateTask";
 
 function UserTaskPage() {
   return (
@@ -10,14 +11,7 @@ function UserTaskPage() {
         <div className="flex justify-between">
           <Typography variant="h6">User Tasks</Typography>
           <div>
-            <Button
-              variant="contained"
-              size="small"
-              className="mr-4"
-              startIcon={<Add />}
-            >
-              Create Task
-            </Button>
+            <CreateTask />
           </div>
         </div>
         <div className="mt-4 flex flex-wrap">
