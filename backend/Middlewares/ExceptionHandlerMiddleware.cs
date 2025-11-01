@@ -43,12 +43,12 @@ public class ExceptionHandlerMiddleware
 		{
 			ErrorMessage = exception.Message,
 			Type = exception.GetType().Name,
-			Success = false,
 			StatusCode = (int)status
 		};
 
 		var payload = JsonSerializer.Serialize(response);
 
+		context.Response.StatusCode = (int)status;
 		context.Response.ContentType = "application/json";
 		//context.Response.StatusCode = (int)statusCode;
 
@@ -58,26 +58,26 @@ public class ExceptionHandlerMiddleware
 
 #region Reponses Models
 //This is to standardize responses from the API
-class ResponseBase
+public class ResponseBase
 {
-	public bool Success { get; set; }
+	public bool Success { get; protected set; }
 }
-class SuccessResponse : ResponseBase
+public class SuccessResponse : ResponseBase
 {
-	SuccessResponse()
+	public SuccessResponse()
 	{
 		base.Success = true;
 	}
 }
-class SucessResponse<T> : ResponseBase
+public class SuccessResponse<T> : ResponseBase
 {
-	SucessResponse()
+	public SuccessResponse()
 	{
 		base.Success = true;
 	}
 	public T? Data { get; set; } = default;
 }
-class FailedResponse : ResponseBase
+public class FailedResponse : ResponseBase
 {
 	public FailedResponse()
 	{
