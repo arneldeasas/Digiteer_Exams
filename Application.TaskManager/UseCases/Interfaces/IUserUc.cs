@@ -5,5 +5,5 @@ namespace Application.TaskManager.UseCases.Interfaces;
 public interface IUserUc
 {
 	Task SignUpUser(UserFormDTO form);
-	Task SignInUser(SignInFormDTO form);
+	Task<int> SignInUser(SignInFormDTO form);
 }
