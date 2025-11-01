@@ -23,6 +23,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { signInUser } from "../../Mutations/UserMutations";
 import { useSnackbar } from "notistack";
+import CurrentUserHelper from "../../Helpers/CurrentUserHelper";
 function SignInPage() {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -30,7 +31,8 @@ function SignInPage() {
 
   const mutation = useMutation({
     mutationFn: signInUser,
-    onSuccess: () => {
+    onSuccess: (response) => {
+      CurrentUserHelper.setCurrentUser(response.data);
       enqueueSnackbar("Sign In Successful!", { variant: "success" });
       navigate("/tasks");
     },
