@@ -50,7 +50,7 @@ function UserTaskPage() {
         </div>
         <div className="mt-4 flex flex-wrap gap-4">
           {data && data.map((task) => <TaskCard key={task.id} task={task} />)}
-          {data.length === 0 && !isLoading && (
+          {data && data.length === 0 && !isLoading && (
             <Typography variant="body1">No tasks found.</Typography>
           )}
         </div>

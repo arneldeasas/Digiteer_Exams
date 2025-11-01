@@ -6,5 +6,9 @@ const createTask = async (newTask) => {
     async () => await api.post("/tasks/create-task", newTask)
   );
 };
-
-export { createTask };
+const startTask = async (taskId) => {
+  return await handleApiResponse(
+    async () => await api.post(`/tasks/start-task/${taskId}`)
+  );
+};
+export { createTask, startTask };
