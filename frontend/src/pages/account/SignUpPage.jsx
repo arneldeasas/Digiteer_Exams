@@ -41,7 +41,7 @@ function SignUpPage() {
   });
 
   const onSubmit = (data) => {
-    enqueueSnackbar("Sign Up Successful!", { variant: "success" });
+    enqueueSnackbar("Sign Up Successful!");
     console.log(data);
   };
 
