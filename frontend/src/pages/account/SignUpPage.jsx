@@ -19,12 +19,26 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import InputAdornment from "@mui/material/InputAdornment";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import { signUpUser } from "../../Mutations/UserMutations";
+import { useMutation } from "@tanstack/react-query";
 function SignUpPage() {
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const mutation = useMutation({
+    mutationFn: signUpUser,
+    onSuccess: () => {
+      enqueueSnackbar("Sign Up Successful!", { variant: "success" });
+      navigate("/");
+    },
+    onError: (error) => {
+      enqueueSnackbar("Sign Up Failed!", { variant: "error" });
+    },
+  });
 
   const {
     control,
@@ -40,9 +54,8 @@ function SignUpPage() {
     },
   });
 
-  const onSubmit = (data) => {
-    enqueueSnackbar("Sign Up Successful!");
-    console.log(data);
+  const onSubmit = async (data) => {
+    await mutation.mutateAsync(data);
   };
 
   const handleClickShowPassword = () => {
@@ -154,7 +167,11 @@ function SignUpPage() {
                     </FormControl>
                   )}
                 />
-                <Button type="submit" variant="contained">
+                <Button
+                  loading={mutation.isPending}
+                  type="submit"
+                  variant="contained"
+                >
                   Sign Up
                 </Button>
               </div>
