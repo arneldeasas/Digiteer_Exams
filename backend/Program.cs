@@ -18,6 +18,17 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddApplicationDependencies();
 builder.Services.AddDatabaseDependencies();
 
+builder.Services.AddCors(options =>
+{
+	options.AddDefaultPolicy(policy =>
+	{
+		//This should be configured to allow specific origins of the frontend application in production or any consumer interfaces, but for demo purposes, we allow all.
+		policy.AllowAnyOrigin()
+			  .AllowAnyHeader()
+			  .AllowAnyMethod();
+	});
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -25,6 +36,7 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
+app.UseCors();
 
 app.UseHttpsRedirection();
 app.MapControllers();
