@@ -32,7 +32,7 @@ function SignInPage() {
   const mutation = useMutation({
     mutationFn: signInUser,
     onSuccess: (response) => {
-      CurrentUserHelper.setCurrentUser(response.data);
+      CurrentUserHelper.setCurrentUser(response);
       enqueueSnackbar("Sign In Successful!", { variant: "success" });
       navigate("/tasks");
     },
