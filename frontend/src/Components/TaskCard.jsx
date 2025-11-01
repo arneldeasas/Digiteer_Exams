@@ -4,18 +4,20 @@ import TaskCardMenu from "./TaskCardMenu";
 
 function TaskCard({ task: { id = 1, title, description, taskStatus } }) {
   return (
-    <Card variant="outlined" className="bg-gray-200 w-[280px] ">
+    <Card variant="outlined" className="bg-gray-200 w-[320px] ">
       <div className="flex justify-between p-2">
         <div className=" flex items-center gap-2">
           <Assignment fontSize="small" />
           <Typography sx={{ fontWeight: 600 }} variant="body2">
-            Task #{id}
+            Task ID #{id}
           </Typography>
         </div>
         <div className="flex justify-end">
-          <Button size="small" variant="text">
-            Start task
-          </Button>
+          {taskStatus === "Not Started" && (
+            <Button size="small" variant="text">
+              Start task
+            </Button>
+          )}
 
           <TaskCardMenu key={1} id="task-menu-1" />
         </div>
