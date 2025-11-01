@@ -7,7 +7,7 @@ import {
   Button,
 } from "@mui/material";
 import { Add } from "@mui/icons-material";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { createTask } from "../Mutations/TaskMutations";
@@ -15,11 +15,15 @@ import { CreateTaskSchema } from "../Schema/TaskSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import CurrentUserHelper from "../Helpers/CurrentUserHelper";
-import { useNavigate, useNavigation } from "react-router-dom";
+
 import { useSnackbar } from "notistack";
 function CreateTask() {
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = React.useState(false);
+
+  const currentUser = CurrentUserHelper.getCurrentUser();
+
+  const queryClient = useQueryClient();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -47,6 +51,7 @@ function CreateTask() {
     mutationFn: createTask,
     onSuccess: () => {
       enqueueSnackbar("Task Created Successfully!", { variant: "success" });
+      queryClient.invalidateQueries(["tasks", currentUser.id]);
       handleClose();
     },
     onError: (error) => {
